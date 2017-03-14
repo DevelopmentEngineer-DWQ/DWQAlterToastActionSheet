@@ -608,6 +608,7 @@
 				0477FB0C1E7693C8005B58E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0477FB0D1E7693C8005B58E7 /* Build configuration list for PBXNativeTarget "DWQAlterToastActionSheetTests" */ = {
 			isa = XCConfigurationList;
@@ -616,6 +617,7 @@
 				0477FB0F1E7693C8005B58E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0477FB101E7693C8005B58E7 /* Build configuration list for PBXNativeTarget "DWQAlterToastActionSheetUITests" */ = {
 			isa = XCConfigurationList;
@@ -624,6 +626,7 @@
 				0477FB121E7693C8005B58E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

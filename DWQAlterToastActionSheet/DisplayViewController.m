@@ -236,7 +236,7 @@
     _alertView2                  = [[DWQAlert alloc] dwq_showTitle:@"杜文全提示："
                                                          message:@"您可以自定义按钮的颜色哦"
                                                            image:nil
-                                                    buttonTitles:@[@"取消", @"确定"] buttonTitlesColor:@[[UIColor redColor], [UIColor greenColor]]];
+                                                    buttonTitles:@[@"取消", @"确定"] buttonTitlesColor:@[[UIColor blueColor], [UIColor orangeColor]]];
     /*! 自定义按钮文字颜色 */
     //    _alertView2.buttonTitleColor = [UIColor orangeColor];
     //_alertView2.bgColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.3];
@@ -338,29 +338,29 @@
     /*! 5、完全自定义alert */
     
     /*! 纯代码加载方式  【建议用 xib 方式】*/
-    /*! 用纯代码的时候，记得这里的自定义 View 不能用懒加载，要不然点击第二次就不会在出现那个自定义 View 了 */
+//    ! 用纯代码的时候，记得这里的自定义 View 不能用懒加载，要不然点击第二次就不会在出现那个自定义 View 了 
     [self setViewPwdBgView];
-    //    self.viewPwdBgView.hidden = NO;
-    //    _alertView5                  = [[DWQAlert alloc] initWithCustomView:self.viewPwdBgView];
-    //    _alertView5.isTouchEdgeHide = YES;
-    //    _alertView5.showAnimate = YES;
-    //    [_alertView5 dwq_showAlertView];
+        self.viewPwdBgView.hidden = NO;
+        _alertView5                  = [[DWQAlert alloc] initWithCustomView:self.viewPwdBgView];
+        _alertView5.isTouchEdgeHide = YES;
+        _alertView5.showAnimate = YES;
+        [_alertView5 dwq_showAlertView];
     
-    DWQWeak;
+   DWQWeak;
     [DWQAlert dwq_showCustomView:self.viewPwdBgView configuration:^(DWQAlert *tempView) {
         tempView.isTouchEdgeHide = YES;
         tempView.animatingStyle = DWQAlertAnimatingStyleScale;
         weakSelf.alertView5 = tempView;
     }];
     
-    /*! xib 加载方式 【建议用 xib 方式】*/
-    //    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"VerCodeAlertView" owner:self options:nil];
-    //    UIView *view1 = nib[0];
-    //    [DWQAlert dwq_showCustomView:view1 configuration:^(DWQAlert *tempView) {
-    //        tempView.isTouchEdgeHide = YES;
-    //        tempView.animatingStyle = DWQAlertAnimatingStyleScale;
-    //        weakSelf.alertView5 = tempView;
-    //    }];
+//   // ! xib 加载方式 【建议用 xib 方式】
+//        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"alertView" owner:self options:nil];
+//        UIView *view1 = nib[0];
+//        [DWQAlert dwq_showCustomView:view1 configuration:^(DWQAlert *tempView) {
+//            tempView.isTouchEdgeHide = YES;
+//            tempView.animatingStyle = DWQAlertAnimatingStyleScale;
+//            weakSelf.alertView5 = tempView;
+//        }];
 }
 
 - (void)setViewPwdBgView
@@ -370,108 +370,28 @@
     _viewPwdBgView                         = [UIView new];
     _viewPwdBgView.frame                   = CGRectMake(30, 100, SCREENWIDTH - 60, 160);
     
-    _viewPwdBgView.backgroundColor         = [UIColor whiteColor];
+    _viewPwdBgView.backgroundColor         = [UIColor redColor];
     _viewPwdBgView.layer.masksToBounds     = YES;
     _viewPwdBgView.layer.cornerRadius      = 10.0f;
     
-    CGFloat buttonWith                     = (SCREENWIDTH - 60)/2 - 0.5;
     CGFloat buttonHeight                   = 40;
     
     UILabel *titleLabel                    = [UILabel new];
     titleLabel.frame                       = CGRectMake(0, 0, _viewPwdBgView.frame.size.width, buttonHeight);
-    titleLabel.text                        = @"请输入密码";
+    titleLabel.text                        = @"我是自定义label";
     titleLabel.textAlignment               = NSTextAlignmentCenter;
     titleLabel.font                        = [UIFont systemFontOfSize:18];
     titleLabel.backgroundColor             = [UIColor clearColor];
-    
-    UIView *lineView1                      = [UIView new];
-    lineView1.frame                        = CGRectMake(0, CGRectGetMaxY(titleLabel.frame), _viewPwdBgView.frame.size.width, 1);
-    lineView1.backgroundColor              = [UIColor lightGrayColor];
-    
-    _pwdTextField                          = [UITextField new];
-    _pwdTextField.frame                    = CGRectMake(20, CGRectGetMaxY(lineView1.frame) + 20, _viewPwdBgView.frame.size.width - 40, buttonHeight);
-    _pwdTextField.borderStyle              = UITextBorderStyleRoundedRect;
-    _pwdTextField.keyboardType             = UIKeyboardTypeNumberPad;
-    _pwdTextField.secureTextEntry          = YES;
-    _pwdTextField.textAlignment            = NSTextAlignmentCenter;
-    _pwdTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    //        _pwdTextField.autoresizingMask         = UIViewAutoresizingFlexibleWidth;
-    [_pwdTextField becomeFirstResponder];
-    
-    UIView *lineView2                      = [UIView new];
-    lineView2.frame                        = CGRectMake(0, _viewPwdBgView.frame.size.height - 41, _viewPwdBgView.frame.size.width, 1);
-    lineView2.backgroundColor              = [UIColor lightGrayColor];
-    
-    UIButton *cancleButton                 = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(lineView2.frame), buttonWith, buttonHeight)];
-    [cancleButton setTitle:@"取消" forState:UIControlStateNormal];
-    [cancleButton setBackgroundColor:[UIColor clearColor]];
-    [cancleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [cancleButton addTarget:self action:@selector(cancleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    //        cancleButton.autoresizingMask          = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
-    
-    UIView *lineView3                      = [UIView new];
-    lineView3.frame                        = CGRectMake(buttonWith, CGRectGetMinY(cancleButton.frame), 1, buttonHeight);
-    lineView3.backgroundColor              = [UIColor lightGrayColor];
-    
-    UIButton *sureButton                   = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lineView3.frame), CGRectGetMinY(cancleButton.frame), buttonWith, buttonHeight)];
-    [sureButton setTitle:@"确定" forState:UIControlStateNormal];
-    [sureButton setBackgroundColor:[UIColor clearColor]];
-    [sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [sureButton addTarget:self action:@selector(cancleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    //        sureButton.autoresizingMask            = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
-    
-    cancleButton.tag                       = 1;
-    sureButton.tag                         = 2;
-    
+    UIButton *button =[[UIButton alloc]init];
+    button.frame=CGRectMake(60, CGRectGetMaxY(titleLabel.frame)+buttonHeight, SCREENWIDTH - 180, 30);
+    button.backgroundColor=[UIColor yellowColor];
+    [button setTitle:@"我是自定义button" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_viewPwdBgView addSubview:titleLabel];
-    [_viewPwdBgView addSubview:lineView1];
-    [_viewPwdBgView addSubview:_pwdTextField];
-    [_viewPwdBgView addSubview:lineView2];
-    [_viewPwdBgView addSubview:cancleButton];
-    [_viewPwdBgView addSubview:lineView3];
-    [_viewPwdBgView addSubview:sureButton];
+    [_viewPwdBgView addSubview:button];
+
     
-    //        //这里是让titleLabel跟父view上左右边距为0,底部间距不设置
-    //        [titleLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeBottom];
-    //        //设置titleLabel的高度为buttonHeight
-    //        [titleLabel autoSetDimension:ALDimensionHeight toSize:buttonHeight];
-    //
-    //        //设置lineView1与父view左右间距为0,顶部和titleLabel的底部间距为0,高度为1
-    //        [lineView1 autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_viewPwdBgView];
-    //        [lineView1 autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_viewPwdBgView];
-    //        [lineView1 autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:titleLabel];
-    //        [lineView1 autoSetDimension:ALDimensionHeight toSize:1.0];
-    //
-    //        //设置_pwdTextField与父view左右间距为20,顶部和lineView1的底部间距为20,高度为buttonHeight
-    //        [_pwdTextField autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_viewPwdBgView withOffset:20];
-    //        [_pwdTextField autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_viewPwdBgView withOffset:-20];
-    //        [_pwdTextField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:lineView1 withOffset:20];
-    //        [_pwdTextField autoSetDimension:ALDimensionHeight toSize:buttonHeight];
-    //
-    //        //这里是让lineView2跟父view上左右边距为0,顶部间距不设置,底部跟父view间距41,高度为buttonHeight
-    //        [lineView2 autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 41.0, 0) excludingEdge:ALEdgeTop];
-    //        [lineView2 autoSetDimension:ALDimensionHeight toSize:1.0];
-    //
-    //        //设置cancleButton与父view左底间距为0,高度为buttonHeight,宽度为buttonWith
-    //        [cancleButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_viewPwdBgView];
-    //        [cancleButton autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_viewPwdBgView];
-    //        [cancleButton autoSetDimension:ALDimensionHeight toSize:buttonHeight];
-    //
-    //        //设置lineView3与父view底间距为0,高度为buttonHeight,左边与cancelButton的右间距为0,宽度为1
-    //        [lineView3 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:cancleButton];
-    //        [lineView3 autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_viewPwdBgView];
-    //        [lineView3 autoSetDimension:ALDimensionHeight toSize:buttonHeight];
-    //        [lineView3 autoSetDimension:ALDimensionWidth toSize:1];
-    //
-    //        //设置sureButton与父view底右间距为0,高度为buttonHeight,左边与cancelButton的右间距为0
-    //        [sureButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:lineView3];
-    //        [sureButton autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:_viewPwdBgView];
-    //        [sureButton autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_viewPwdBgView];
-    //        [sureButton autoSetDimension:ALDimensionHeight toSize:buttonHeight];
-    //        [sureButton autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:cancleButton];
-    
-    //    }
-    //    return _viewPwdBgView;
+   
 }
 
 
